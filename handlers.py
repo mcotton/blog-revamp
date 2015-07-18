@@ -119,13 +119,13 @@ class EditHandler(webapp2.RequestHandler):
       self.redirect("/blog")
 
     else:
-      b = Blog().get(resource)
-      if b is None:
+      p = Blog().get(resource)
+      if p is None:
         self.redirect('/blog')
       else:
         template_values = {
           'resource': resource,
-          'b': b,
+          'p': p,
           'admin': admin,
           'admin_url': admin_url,
           'admin_url_text': admin_url_text
@@ -176,10 +176,10 @@ class PostHandler(webapp2.RequestHandler):
       self.redirect("/blog")
 
     else:
-      b = Blog().get(resource)
+      p = Blog().get(resource)
       template_values = {
         'resource': resource,
-        'b': b,
+        'p': p,
         'admin': admin,
         'admin_url': admin_url,
         'admin_url_text': admin_url_text
@@ -227,6 +227,66 @@ class ExportHandler(webapp2.RequestHandler):
 
     self.response.headers['Content-Type'] = 'application/rss+xml'
     render_template(self, 'templates/rss.html', template_values)
+
+
+
+class CreateHandler(webapp2.RequestHandler):
+  def get(self, resource=''):
+
+    #Check to see if user is an admin, and display correct link
+    admin = users.is_current_user_admin()
+    user = users.get_current_user()
+    if admin:
+      admin_url = users.create_logout_url("/blog")
+      admin_url_text = 'Logout'
+      nickname = user.nickname()
+    else:
+      admin_url = users.create_login_url("/blog")
+      admin_url_text = 'Login'
+      nickname = ''
+
+    template_values = {
+      'nickname': nickname,
+      'admin': admin,
+      'admin_url': admin_url,
+      'admin_url_text': admin_url_text
+    }
+
+    render_template(self, 'templates/new.html', template_values)
+
+
+  def post(self, resource):
+    if users.is_current_user_admin():
+      b = Blog()
+      s = SideBar()
+      b.title = self.request.get("title")
+      b.content = self.request.get("html_body")
+      b.markdown = self.request.get("user_input")
+      b.author = self.request.get('author')
+      b.content_img = self.request.get('content_img')
+      b.teaser = self.request.get('teaser')
+      b.tag = self.request.get("category").lower()
+      s.path = self.request.get("category").lower()
+      s.title = self.request.get("category").lower()
+      #this is weird, but this is a batch put to the datastore
+      updated = []
+      updated.append(b)
+      updated.append(s)
+      db.put(updated)
+
+    self.redirect("/blog")
+
+
+
+class LoginHandler(webapp2.RequestHandler):
+  def get(self, resource=''):
+    admin_url = users.create_login_url("/blog")
+    self.redirect(admin_url)
+
+class LogoutHandler(webapp2.RequestHandler):
+  def get(self, resource=''):
+    admin_url = users.create_logout_url("/blog")
+    self.redirect(admin_url)
 
 
 

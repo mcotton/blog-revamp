@@ -43,7 +43,7 @@
                                                 <p class="post-meta">{% if p.author %} by {{ p.author|safe }} on {% endif %}{{ p.date|date }}
                                                   {% if admin %}
                                                      || <a href="/edit/{{ p.key }}">edit</a>
-                                                     || <a href="/delete/{{ p.key }}">remove</a>
+                                                     <!-- || <a href="/delete/{{ p.key }}">remove</a> -->
                                                   {% endif %}
                                                 </p>
 
@@ -90,52 +90,7 @@
                             
 
                             
-{% if admin %}
-  <br><hr>
-        <div class="row">
-          <div class="col-md-10 col-md-offset-1">
-              <div class="article-list">
-                  <article class="post">
-                      <div class="post-summary">
-                          <form id="comment_form" action="/blog/" method="post"> 
-                              <h3>Post Something New</h3>
-                              <p>
-                                <input id="title" name="title" placeholder="Title" type="text" style="width: 80%"/>
-                                <input id="category" placeholder="Category" name="category" type="text"  style="width: 80%"/>
-                                <input id="category" placeholder="Author" name="author" type="text"  style="width: 80%"/>
-                              </p>
-                              <div id="entry-container"> 
-                                <p>
-                                  <textarea id="content_img" placeholder="Content Image" name="content_img" rows="5" style="width: 80%"></textarea>
-                                </p>
-                              </div>
-                              <div id="entry-container"> 
-                                <p>
-                                  <input type="checkbox" name="show_teaser"/>Show Teaser?
-                                </p>
-                                <p>
-                                  <textarea id="teaser" placeholder="Teaser" name="teaser" rows="5" style="width: 80%"></textarea>
-                                </p>
-                              </div>
-                              <div id="entry-container"> 
-                                <p>
-                                  <textarea id="user_input" placeholder="Enter Markdown" name="user_input" rows="10" style="width: 80%"></textarea>
-                                </p>
-                              </div> 
-                            <div id="html_preview">
-                            <p>
-                              <textarea id="textbody" placeholder="HTML Preview" name="html_body" rows="10" style="width: 80%" class="wikistyle"></textarea>
-                            </p>
-                          </div>
-                          <br>
-                          <!-- Add Comment Button -->
-                          <input type="submit" class="" name="Publish" value="Publish">
-                        </form>
-                      </div>
-                    </div>
-                </div>
-            </div>
-  {% endif %}
+
         </section>
 {% endblock %}
 

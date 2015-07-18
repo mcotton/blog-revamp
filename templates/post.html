@@ -1,38 +1,102 @@
-{% extends "template.html" %}
+
+{% extends "base.html" %}
 
 {% block container %}
-    <div id='container'> 
-      <span id='logo'><a href="/">/post</a></span> 
-      <div id='primary'> 
-        <h1><a href="/">&nbsp;&nbsp;&nbsp;&nbsp;by mcottondesign</a></h1>
-          
-        <div class='blog-content'> 
-            {% if b.title %}
-              <div class='posts'>
-                  <h2>{{ b.title }}</h2>
-                  <div style="top: -20px; position: relative; font-size: 12px;">
-                    {{ b.date|date }} &nbsp;&nbsp;
-                    <a href="/blog/{{ b.tag }}">{{ b.tag }}</a>
-                    || <a href="/post/{{ b.key }}">permalink</a> 
-                    {% if admin %}
-                      || <a href="/edit/{{ b.key }}">edit</a>
-                      || <a href="/delete/{{ b.key }}">remove</a>
-                    {% endif %}
-                  </div>
-                  <div style="margin-top: -20px;">
-                    {{ b.content|safe }}
-                  </div>
-              </div>
-            {% endif %}
-          
-        <div class='posts'>
-			<br><br><br><br> <!-- this is so the blog post isn't behind the footer -->
-            &nbsp; <!-- this is to make sure the div always has something in it -->
-          </div>
-        </div> 
-      </div> 
-    </div>
+<section class="maincontent-wrap">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="maincotnent shadow-z-1">
+                            <div class="mainmenu">
+                                <div class="navbar navbar-nobg">
+                                    <div class="navbar-header">
+                                        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                                            <span class="sr-only">Toggle navigation</span>
+                                            <span class="icon-bar"></span>
+                                            <span class="icon-bar"></span>
+                                            <span class="icon-bar"></span>
+                                        </button>
+                                    </div>
+
+                                    <div class="navbar-collapse collapse"> 
+                                        <ul class="nav navbar-nav">
+                                            <li class="active"><a href="index.html">Home <div class="ripple-wrapper"></div></a></li>
+                                            <li><a href="about.html">About</a></li>
+                                            <li><a href="archive.html">Movie</a></li>
+                                            <li><a href="archive.html">Sports</a></li>
+                                            <li><a href="archive.html">Travel</a></li>
+                                            <li><a href="single.html">Single</a></li>
+                                            <li><a href="contact.html">Contact</a></li>
+                                        </ul>                                                     
+                                    </div>     
+                                </div> 
+                            </div> 
+                            
+                            <div class="row">
+                                <div class="col-md-10 col-md-offset-1">
+                                    <div class="article-list">
+                                      {% if p %}
+                                        <article class="post">
+                                            <header class="article-title text-center">
+                                                <p><a href="/blog/{{ p.tag }}">{{ p.tag|safe }}</a></p>
+                                                <h2><a href="/post/{{ p.key }}">{{ p.title|safe }}</a></h2>
+                                                <p class="post-meta">{% if p.author %} by {{ p.author|safe }} on {% endif %}{{ p.date|date }}
+                                                  {% if admin %}
+                                                     || <a href="/edit/{{ p.key }}">edit</a>
+                                                     <!-- || <a href="/delete/{{ p.key }}">remove</a> -->
+                                                  {% endif %}
+                                                </p>
+
+                                            </header>
+
+                                            {% if p.content_img %}
+                                            <div class="article-featured-content shadow-z-2">
+                                                {{ p.content_img|safe }}
+                                            </div>
+                                            {% endif %}
+
+                                            <div class="post-summary">
+                                                {{ p.content|safe }}
+                                            </div>
+
+                                            {% if p.show_teaser %}
+                                            <div class="post-detail-link text-center">
+                                                <a href="single.html" class="btn btn-fab btn-raised btn-material-red">
+                                                    <i class="fa fa-plus"></i>
+                                                    <div class="ripple-wrapper"></div>
+                                                </a>
+                                            </div>
+                                            {% endif %}
+
+                                        </article>
+                                      {% endif %}
+
+                                       
+                                        
+                                        
+                                        <nav role="navigation" class="navigation posts-navigation">
+                                            <div class="nav-links">
+                                                <div class="nav-previous">
+                                                    <a href="#">Older posts</a>
+                                                </div>
+                                                <div class="nav-next">
+                                                    <a href="#">Newer posts</a>
+                                                </div>
+                                            </div>
+                                        </nav>                                        
+                                    </div>                                    
+                                </div>
+                            </div>
+                            
+
+                            
+
+        </section>
 {% endblock %}
+
+
+
+
 
 {% block footer %} 
       <div id='footer'>  

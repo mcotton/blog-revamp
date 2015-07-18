@@ -34,7 +34,7 @@
                             
 
                             
-        {% if p %}
+        {% if admin %}
           <hr>
             <div class="row">
               <div class="col-md-10 col-md-offset-1">
@@ -44,13 +44,13 @@
                               <form id="comment_form" action="/blog/" method="post"> 
                                   <h3>Post Something New</h3>
                                   <p>
-                                    <input id="title" name="title" placeholder="Title" type="text" style="width: 100%" value="{{ p.title }}"/>
-                                    <input id="category" placeholder="Category" name="category" type="text"  style="width: 100%" value="{{ p.tag }}"/>
-                                    <input id="category" placeholder="Author" name="author" type="text"  style="width: 100%"/ value="{{ p.nickname }}">
+                                    <input id="title" name="title" placeholder="Title" type="text" style="width: 100%"/>
+                                    <input id="category" placeholder="Category" name="category" type="text"  style="width: 100%"/>
+                                    <input id="category" placeholder="Author" name="author" type="text"  style="width: 100%"/ value="{{ nickname }}">
                                   </p>
                                   <div id="entry-container"> 
                                     <p>
-                                      <textarea id="content_img" placeholder="Content Image" name="content_img" rows="5" style="width: 100%">{{ p.content_img }}</textarea>
+                                      <textarea id="content_img" placeholder="Content Image" name="content_img" rows="5" style="width: 100%"></textarea>
                                     </p>
                                   </div>
                                   <div id="entry-container"> 
@@ -58,22 +58,22 @@
                                       <input type="checkbox" name="show_teaser"/>Show Teaser?
                                     </p>
                                     <p>
-                                      <textarea id="teaser" placeholder="Teaser" name="teaser" rows="5" style="width: 100%">{{ p.teaser }}</textarea>
+                                      <textarea id="teaser" placeholder="Teaser" name="teaser" rows="5" style="width: 100%"></textarea>
                                     </p>
                                   </div>
                                   <div id="entry-container"> 
                                     <p>
-                                      <textarea id="user_input" placeholder="Enter Markdown" name="user_input" rows="10" style="width: 100%">{{ p.markdown }}</textarea>
+                                      <textarea id="user_input" placeholder="Enter Markdown" name="user_input" rows="10" style="width: 100%"></textarea>
                                     </p>
                                   </div> 
                                 <div id="html_preview">
                                 <p>
-                                  <textarea id="textbody" placeholder="HTML Preview" name="html_body" rows="10" style="width: 100%" class="wikistyle">{{ p.content }}</textarea>
+                                  <textarea id="textbody" placeholder="HTML Preview" name="html_body" rows="10" style="width: 100%" class="wikistyle"></textarea>
                                 </p>
                               </div>
                               <br>
                               <!-- Add Comment Button -->
-                              <input type="submit" class="" name="Publish" value="Update">
+                              <input type="submit" class="" name="Publish" value="Publish">
                             </form>
                           </div>
                         </div>
