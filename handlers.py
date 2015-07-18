@@ -150,9 +150,15 @@ class EditHandler(webapp2.RequestHandler):
 
     b = Blog().get(resource)
     #check if it found anything
-    if b and admin:
+    if b:
       b.title = self.request.get("title")
       b.content = self.request.get("html_body")
+      if self.request.get('content_img'):
+        b.content_img = self.request.get('content_img')
+      if self.request.get('teaser'):
+        b.teaser = self.request.get('teaser')
+      if self.request.get('author'):
+        b.author = self.request.get('author')
       b.markdown = self.request.get("user_input")
       b.tag = self.request.get("category").lower()
       b.put()
