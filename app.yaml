@@ -26,12 +26,12 @@ handlers:
   static_dir: templates/fonts
 
 - url: /favicon.ico
-  static_files: templates/_images/favicon.ico
-  upload: templates/_images/favicon.ico
+  static_files: templates/img/favicon.ico
+  upload: templates/img/favicon.ico
 
 - url: /robots.txt
-  static_files: templates/_images/robots.txt
-  upload: templates/_images/favicon.ico
+  static_files: templates/img/robots.txt
+  upload: templates/img/favicon.ico
 
 - url: /.*
   script: main.app
