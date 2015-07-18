@@ -1,0 +1,37 @@
+application: mcottondesign3-hrd
+version: blog-revamp
+runtime: python27
+api_version: 1
+threadsafe: true
+
+libraries:
+- name: markupsafe
+  version: latest
+- name: jinja2
+  version: latest
+- name: webapp2
+  version: latest
+
+handlers:
+- url: /img
+  static_dir: templates/img
+
+- url: /css
+  static_dir: templates/css
+
+- url: /js
+  static_dir: templates/js
+
+- url: /fonts
+  static_dir: templates/fonts
+
+- url: /favicon.ico
+  static_files: templates/_images/favicon.ico
+  upload: templates/_images/favicon.ico
+
+- url: /robots.txt
+  static_files: templates/_images/robots.txt
+  upload: templates/_images/favicon.ico
+
+- url: /.*
+  script: main.app

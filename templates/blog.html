@@ -1,0 +1,159 @@
+
+{% extends "base.html" %}
+
+{% block container %}
+<section class="maincontent-wrap">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="maincotnent shadow-z-1">
+                            <div class="mainmenu">
+                                <div class="navbar navbar-nobg">
+                                    <div class="navbar-header">
+                                        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                                            <span class="sr-only">Toggle navigation</span>
+                                            <span class="icon-bar"></span>
+                                            <span class="icon-bar"></span>
+                                            <span class="icon-bar"></span>
+                                        </button>
+                                    </div>
+
+                                    <div class="navbar-collapse collapse"> 
+                                        <ul class="nav navbar-nav">
+                                            <li class="active"><a href="index.html">Home <div class="ripple-wrapper"></div></a></li>
+                                            <li><a href="about.html">About</a></li>
+                                            <li><a href="archive.html">Movie</a></li>
+                                            <li><a href="archive.html">Sports</a></li>
+                                            <li><a href="archive.html">Travel</a></li>
+                                            <li><a href="single.html">Single</a></li>
+                                            <li><a href="contact.html">Contact</a></li>
+                                        </ul>                                                     
+                                    </div>     
+                                </div> 
+                            </div> 
+                            
+                            <div class="row">
+                                <div class="col-md-10 col-md-offset-1">
+                                    <div class="article-list">
+                                      {% for p in posts %}
+                                        <article class="post">
+                                            <header class="article-title text-center">
+                                                <p><a href="/blog/{{ p.tag }}">{{ p.tag }}</a></p>
+                                                <h2><a href="/post/{{ p.key }}">{{ p.title }}</a></h2>
+                                                <p class="post-meta">by Mark Cotton  @ {{ p.date|date }}
+                                                  {% if admin %}
+                                                     || <a href="/edit/{{ p.key }}">edit</a>
+                                                     || <a href="/delete/{{ p.key }}">remove</a>
+                                                  {% endif %}
+                                                </p>
+
+                                            </header>
+
+                                            {% if p.content_img %}
+                                            <div class="article-featured-content shadow-z-2">
+                                                <a href="/post/{{ p.key }}"><img class="img-responsive" src="{{ p.content_img }}" alt="{{ p.title }}"></a>
+                                            </div>
+                                            {% endif %}
+
+                                            <div class="post-summary">
+                                                {{ p.content|safe }}
+                                            </div>
+
+                                            <div class="post-detail-link text-center">
+                                                <a href="single.html" class="btn btn-fab btn-raised btn-material-red">
+                                                    <i class="fa fa-plus"></i>
+                                                    <div class="ripple-wrapper"></div>
+                                                </a>
+                                            </div>
+                                        </article>
+                                      {% endfor %}
+
+                                       
+                                        
+                                        
+                                        <nav role="navigation" class="navigation posts-navigation">
+                                            <div class="nav-links">
+                                                <div class="nav-previous">
+                                                    <a href="#">Older posts</a>
+                                                </div>
+                                                <div class="nav-next">
+                                                    <a href="#">Newer posts</a>
+                                                </div>
+                                            </div>
+                                        </nav>                                        
+                                    </div>                                    
+                                </div>
+                            </div>
+                            
+
+                            <div class='posts'>
+            {% if admin %}
+            <script type="text/javascript" src="/js/showdown.js"></script>
+            <script type="text/javascript"> 
+              $(function() {
+                var converter = new Showdown.converter();
+                $("#user_input").keyup(function(event){
+                  var txt = $("#user_input").val();
+                  var html = converter.makeHtml(txt);
+                  $(".wikistyle").val(html)
+         
+                });
+              });
+              
+              $(document).ready(function() {
+                $('#html_preview').hide();
+                $('#show_html').click(function(event) {
+                    event.preventDefault(); 
+                    $('#html_preview').toggle();
+                });
+              });
+            </script> 
+            
+            
+            <br>
+        <form id="comment_form" action="/blog/" method="post"> 
+        <h3>Post Something New</h3>
+            <p><input id="title" name="title" placeholder="Title" type="text" size="23"/></p>
+            <p><input id="category" placeholder="Category" name="category" type="text"  size="23"/></p>
+                      <div id="entry-container"> 
+                        <p><textarea id="user_input" placeholder="Enter Markdown" name="user_input" rows="10" cols="30"></textarea>
+                        
+                        <h6><a href="#" id="show_html">toggle html preview</a></h6>
+                        
+                        </p>
+                      </div> 
+                      <div id="html_preview">
+              <p><textarea id="textbody" placeholder="HTML Preview" name="html_body" rows="10" cols="30" class="wikistyle"></textarea></p>
+              </div>
+            <br>
+              <!-- Add Comment Button -->
+              <input type="submit" class="" name="Publish" value="Publish">
+      </form> 
+      {% endif %}
+      <br><br><br><br> <!-- this is so the blog post isn't behind the footer -->
+            &nbsp; <!-- this is to make sure the div always has something in it -->
+          </div>
+
+                            
+                           
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+{% endblock %}
+
+
+
+
+
+{% block footer %} 
+      <div id='footer'>  
+        <span>
+            <a href="/">home</a> <b>||</b>
+            <a href="/blog">blog</a> <b>||</b>
+            <a href="/blog/contact">contact</a> <b>||</b>
+            <a href="{{ admin_url }}">{{ admin_url_text }}</a> 
+        </span> 
+      </div>  
+{% endblock %}
