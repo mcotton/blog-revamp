@@ -38,9 +38,9 @@
                                       {% for p in posts %}
                                         <article class="post">
                                             <header class="article-title text-center">
-                                                <p><a href="/blog/{{ p.tag }}">{{ p.tag }}</a></p>
-                                                <h2><a href="/post/{{ p.key }}">{{ p.title }}</a></h2>
-                                                <p class="post-meta">by Mark Cotton  @ {{ p.date|date }}
+                                                <p><a href="/blog/{{ p.tag }}">{{ p.tag|safe }}</a></p>
+                                                <h2><a href="/post/{{ p.key }}">{{ p.title|safe }}</a></h2>
+                                                <p class="post-meta">{% if p.author %} by {{ p.author|safe }} on {% endif %}{{ p.date|date }}
                                                   {% if admin %}
                                                      || <a href="/edit/{{ p.key }}">edit</a>
                                                      || <a href="/delete/{{ p.key }}">remove</a>
@@ -51,7 +51,7 @@
 
                                             {% if p.content_img %}
                                             <div class="article-featured-content shadow-z-2">
-                                                <a href="/post/{{ p.key }}"><img class="img-responsive" src="{{ p.content_img }}" alt="{{ p.title }}"></a>
+                                                {{ p.content_img|safe }}
                                             </div>
                                             {% endif %}
 
@@ -59,12 +59,15 @@
                                                 {{ p.content|safe }}
                                             </div>
 
+                                            {% if p.show_teaser %}
                                             <div class="post-detail-link text-center">
                                                 <a href="single.html" class="btn btn-fab btn-raised btn-material-red">
                                                     <i class="fa fa-plus"></i>
                                                     <div class="ripple-wrapper"></div>
                                                 </a>
                                             </div>
+                                            {% endif %}
+
                                         </article>
                                       {% endfor %}
 
@@ -86,60 +89,53 @@
                             </div>
                             
 
-                            <div class='posts'>
-            {% if admin %}
-            <script type="text/javascript" src="/js/showdown.js"></script>
-            <script type="text/javascript"> 
-              $(function() {
-                var converter = new Showdown.converter();
-                $("#user_input").keyup(function(event){
-                  var txt = $("#user_input").val();
-                  var html = converter.makeHtml(txt);
-                  $(".wikistyle").val(html)
-         
-                });
-              });
-              
-              $(document).ready(function() {
-                $('#html_preview').hide();
-                $('#show_html').click(function(event) {
-                    event.preventDefault(); 
-                    $('#html_preview').toggle();
-                });
-              });
-            </script> 
-            
-            
-            <br>
-        <form id="comment_form" action="/blog/" method="post"> 
-        <h3>Post Something New</h3>
-            <p><input id="title" name="title" placeholder="Title" type="text" size="23"/></p>
-            <p><input id="category" placeholder="Category" name="category" type="text"  size="23"/></p>
-                      <div id="entry-container"> 
-                        <p><textarea id="user_input" placeholder="Enter Markdown" name="user_input" rows="10" cols="30"></textarea>
-                        
-                        <h6><a href="#" id="show_html">toggle html preview</a></h6>
-                        
-                        </p>
-                      </div> 
-                      <div id="html_preview">
-              <p><textarea id="textbody" placeholder="HTML Preview" name="html_body" rows="10" cols="30" class="wikistyle"></textarea></p>
-              </div>
-            <br>
-              <!-- Add Comment Button -->
-              <input type="submit" class="" name="Publish" value="Publish">
-      </form> 
-      {% endif %}
-      <br><br><br><br> <!-- this is so the blog post isn't behind the footer -->
-            &nbsp; <!-- this is to make sure the div always has something in it -->
-          </div>
-
                             
-                           
-                        </div>
+{% if admin %}
+  <br><hr>
+        <div class="row">
+          <div class="col-md-10 col-md-offset-1">
+              <div class="article-list">
+                  <article class="post">
+                      <div class="post-summary">
+                          <form id="comment_form" action="/blog/" method="post"> 
+                              <h3>Post Something New</h3>
+                              <p>
+                                <input id="title" name="title" placeholder="Title" type="text" style="width: 80%"/>
+                                <input id="category" placeholder="Category" name="category" type="text"  style="width: 80%"/>
+                                <input id="category" placeholder="Author" name="author" type="text"  style="width: 80%"/>
+                              </p>
+                              <div id="entry-container"> 
+                                <p>
+                                  <textarea id="content_img" placeholder="Content Image" name="content_img" rows="5" style="width: 80%"></textarea>
+                                </p>
+                              </div>
+                              <div id="entry-container"> 
+                                <p>
+                                  <input type="checkbox" name="show_teaser"/>Show Teaser?
+                                </p>
+                                <p>
+                                  <textarea id="teaser" placeholder="Teaser" name="teaser" rows="5" style="width: 80%"></textarea>
+                                </p>
+                              </div>
+                              <div id="entry-container"> 
+                                <p>
+                                  <textarea id="user_input" placeholder="Enter Markdown" name="user_input" rows="10" style="width: 80%"></textarea>
+                                </p>
+                              </div> 
+                            <div id="html_preview">
+                            <p>
+                              <textarea id="textbody" placeholder="HTML Preview" name="html_body" rows="10" style="width: 80%" class="wikistyle"></textarea>
+                            </p>
+                          </div>
+                          <br>
+                          <!-- Add Comment Button -->
+                          <input type="submit" class="" name="Publish" value="Publish">
+                        </form>
+                      </div>
                     </div>
                 </div>
             </div>
+  {% endif %}
         </section>
 {% endblock %}
 
