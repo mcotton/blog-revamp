@@ -245,14 +245,11 @@ class CreateHandler(webapp2.RequestHandler):
     if admin:
       admin_url = users.create_logout_url("/blog")
       admin_url_text = 'Logout'
-      nickname = user.nickname()
     else:
       admin_url = users.create_login_url("/blog")
       admin_url_text = 'Login'
-      nickname = ''
 
     template_values = {
-      'nickname': nickname,
       'admin': admin,
       'admin_url': admin_url,
       'admin_url_text': admin_url_text
