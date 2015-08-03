@@ -279,6 +279,28 @@ class CreateHandler(webapp2.RequestHandler):
 
     self.redirect("/blog")
 
+class ImgUploadHandler(webapp2.RequestHandler):
+  def get(self, resource=''):
+    #Check to see if user is an admin, and display correct link
+    admin = users.is_current_user_admin()
+    user = users.get_current_user()
+    if admin:
+      admin_url = users.create_logout_url("/blog")
+      admin_url_text = 'Logout'
+    else:
+      admin_url = users.create_login_url("/blog")
+      admin_url_text = 'Login'
+
+    template_values = {
+      'admin': admin,
+      'admin_url': admin_url,
+      'admin_url_text': admin_url_text
+    }
+
+    render_template(self, 'templates/upload.html', template_values)
+
+  def post(self, resource):
+    pass
 
 
 class LoginHandler(webapp2.RequestHandler):

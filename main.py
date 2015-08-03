@@ -28,6 +28,7 @@ app = webapp2.WSGIApplication([('/', BlogHandler),
                                 ('/post/([^/]+)?', PostHandler),
                                 ('/export', ExportHandler),
                                 ('/new', CreateHandler),
+                                ('/upload_img', ImgUploadHandler),
                                 ('/login', LoginHandler),
                                 ('/logout', LogoutHandler)],
                                  debug=isLocal())

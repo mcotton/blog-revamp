@@ -17,6 +17,20 @@
                                             <span class="icon-bar"></span>
                                         </button>
                                     </div>
+
+                                    <div class="navbar-collapse collapse"> 
+                                        <ul class="nav navbar-nav">
+                                            <li class="active"><a href="/">Home <div class="ripple-wrapper"></div></a></li>
+                                            <li><a href="/blog/general">General</a></li>
+                                            <li><a href="/blog/programming">Programming</a></li>
+                                            <li><a href="/blog/work">Work</a></li>
+                                            <li><a href="/blog/photography">Photography</a></li>
+                                            <li><a href="/blog/contact">Contact</a></li>
+                                            {% if admin %}
+                                              <li><a href="/new">New</a></li>
+                                            {% endif %}
+                                        </ul>                                              
+                                    </div> 
                                 </div> 
                             </div> 
                             

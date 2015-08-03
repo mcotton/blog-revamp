@@ -22,3 +22,4 @@ class Assets(db.Model):
   img_key = db.StringProperty()
   uploader = db.StringProperty()
   short_url = db.StringProperty()
+  data = db.BlobProperty()

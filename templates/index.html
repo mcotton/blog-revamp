@@ -20,12 +20,14 @@
                                     <div class="navbar-collapse collapse"> 
                                         <ul class="nav navbar-nav">
                                             <li class="active"><a href="/">Home <div class="ripple-wrapper"></div></a></li>
-                                            <li><a href="about.html">About</a></li>
-                                            <li><a href="archive.html">Movie</a></li>
-                                            <li><a href="archive.html">Sports</a></li>
-                                            <li><a href="archive.html">Travel</a></li>
-                                            <li><a href="single.html">Single</a></li>
-                                            <li><a href="contact.html">Contact</a></li>
+                                            <li><a href="/blog/general">General</a></li>
+                                            <li><a href="/blog/programming">Programming</a></li>
+                                            <li><a href="/blog/work">Work</a></li>
+                                            <li><a href="/blog/photography">Photography</a></li>
+                                            <li><a href="/blog/contact">Contact</a></li>
+                                            {% if admin %}
+                                              <li><a href="/new">New</a></li>
+                                            {% endif %}
                                         </ul>                                                     
                                     </div>     
                                 </div> 
