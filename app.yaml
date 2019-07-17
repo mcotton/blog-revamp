@@ -1,5 +1,3 @@
-application: mcottondesign3-hrd
-version: blog-revamp
 runtime: python27
 api_version: 1
 threadsafe: true

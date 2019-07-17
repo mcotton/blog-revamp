@@ -39,7 +39,7 @@
                                       {% if p %}
                                         <article class="post">
                                             <header class="article-title text-center">
-                                                <p><a href="/blog/{{ p.tag }}">{{ p.tag|safe }}</a></p>
+                                                <h2>{{ p.title|safe }}</h2>
                                                 <p class="post-meta"><a href="/blog/{{ p.tag }}">{{ p.tag|safe }}</a> {% if p.author %} by {{ p.author|safe }} on {% endif %}{{ p.date|date }}
                                                   {% if admin %}
                                                      || <a href="/edit/{{ p.key }}">edit</a>
