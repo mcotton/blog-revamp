@@ -55,17 +55,21 @@
                                             </div>
                                             {% endif %}
 
+                                            <!--
                                             <div class="post-summary">
                                                 {{ p.content|safe }}
                                             </div>
+                                            -->
 
                                             {% if p.show_teaser %}
-                                            <div class="post-detail-link text-center">
-                                                <a href="single.html" class="btn btn-fab btn-raised btn-material-red">
-                                                    <i class="fa fa-plus"></i>
-                                                    <div class="ripple-wrapper"></div>
-                                                </a>
-                                            </div>
+                                                <div class="post-summary">
+                                                    {{ p.teaser|safe }}
+                                                </div>
+                                                <h4><a href="/post/{{ p.key }}">Continue Reading</a></h4>
+                                            {% else %}
+                                                <div class="post-summary">
+                                                    {{ p.content|safe }}
+                                                </div>
                                             {% endif %}
 
                                         </article>

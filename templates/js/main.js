@@ -13,12 +13,6 @@
         
         $('.header-bg').scrolly({bgParallax: true});
         
-
-        $('#particles').particleground({
-            dotColor: '#ebebeb',
-            lineColor: '#ebebeb',
-            density: 7000
-        });
     });
 
 

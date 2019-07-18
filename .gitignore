@@ -4,4 +4,4 @@
 *.pyc
 gae_mini_profiler/*.pyc
 datastore
-
+*.swp
